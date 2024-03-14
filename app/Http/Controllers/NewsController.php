@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\DatabaseManager;
+use App\Models\Banner;
 use App\Models\Group;
 use App\Models\News;
 use Illuminate\Http\Request;
@@ -16,11 +17,13 @@ class NewsController extends Controller
     }
     public function index()
     {
+        $banner=Banner::first();
         $news = News::all();
         $groups=Group::all();
         return view('news.home',
             [   'news' => $news,
-                'groups'=>$groups
+                'groups'=>$groups,
+                'banner'=>$banner,
              ]);
     }
 
@@ -35,13 +38,24 @@ class NewsController extends Controller
 
         $userData = json_decode($request->cookie('user_data'), true);
 
+
         $data = $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Đảm bảo tệp là hình ảnh và không quá 2MB
-
         ]);
 
+        if ($request->hasFile('image')) {
+            // Lưu trữ file ảnh vào thư mục public/images
+
+            $image = $request->file('image');
+            $imageName = time().'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName);
+
+            // Lưu đường dẫn của ảnh vào dữ liệu
+            $data['image_path'] = '/images/' . $imageName;
+
+        }
         $data['user_id'] = $data['user_id'] ?? $userData['user_id'];
         $data['author'] = $data['author'] ?? $userData['user_name'];
 

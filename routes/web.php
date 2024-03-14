@@ -5,6 +5,7 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\BannerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,7 +18,7 @@ use App\Http\Controllers\DashboardController;
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('news.home');
 });
 
 Route::get('/home',[NewsController::class,'index']);
@@ -41,5 +42,8 @@ Route::middleware(['auth.dashboard'])->group(function () {
     Route::get('/post',[DashboardController::class,'post']);
     Route::post('/post',[NewsController::class,'store'])->name('post.store');
     Route::resource('news', NewsController::class);
+
+    Route::get('/dashboard/banner',[BannerController::class,'banner'])->name('banner');
+    Route::post('/banners', [BannerController::class,'storeOrUpdate'])->name('banners.createOrUpdate');
 
 });
