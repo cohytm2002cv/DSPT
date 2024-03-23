@@ -25,7 +25,7 @@ Route::get('/', function () {
     return view('news.home');
 });
 
-Route::get('/home',[NewsController::class,'index']);
+Route::get('/home',[NewsController::class,'index'])->name('home');
 Route::get('/show/{id}',[GroupController::class,'show'])->name('group');
 Route::get('/news/{id}',[NewsController::class,'show'])->name('show');
 
@@ -45,13 +45,12 @@ Route::get('/log/',
 );
 
 Route::middleware(['auth.dashboard'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+//    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/dashboard/',[DashboardController::class,'index']);
-    Route::get('/tables',[DashboardController::class,'tables']);
     Route::get('/post',[DashboardController::class,'post']);
     Route::post('/post',[NewsController::class,'store'])->name('post.store');
     Route::resource('news', NewsController::class);
-
+    Route::get('/tables',[DashboardController::class,'tables'])->name('tables');
     Route::get('/dashboard/banner',[BannerController::class,'banner'])->name('banner');
     Route::post('/banners', [BannerController::class,'storeOrUpdate'])->name('banners.createOrUpdate');
     Route::get('/dashboard/group',[GroupController::class,'index'])->name('group');
@@ -63,7 +62,10 @@ Route::middleware(['auth.dashboard'])->group(function () {
 
 // Route để xử lý dữ liệu được gửi từ form sửa đổi
     Route::put('/groups/{id}', [GroupController::class, 'update'])->name('groups.update');
-    Route::delete('/comments/{comment}', 'CommentController@destroy')->name('comments.destroy');
+    Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+});
+Route::group(['middleware' => 'admin'], function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 });
 

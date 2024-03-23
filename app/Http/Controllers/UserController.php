@@ -10,11 +10,10 @@ class UserController extends Controller
 {
     public function index($id)
     {
-        $banner=Banner::first();
         $groups=Group::all();
         $news = News::where('user_id', $id)->get();
         return view('news.home', ['news' => $news,
             'groups'=>$groups,
-            'banner'=>$banner,]);
+            ]);
     }
 }

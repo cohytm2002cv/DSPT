@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddIdNewsToCommentsTable extends Migration
+class UpdateForeignKeyToCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,12 @@ class AddIdNewsToCommentsTable extends Migration
     public function up()
     {
         Schema::table('comments', function (Blueprint $table) {
-        $table->unsignedBigInteger('id_news'); // Thêm cột id_news
-        $table->foreign('id_news')->references('id')->on('news');// Tạo ràng buộc khóa ngoại
-    });
+            $table->dropForeign(['id_news']); // Xóa ràng buộc khóa ngoại cũ
+            $table->foreign('id_news')
+                ->references('id')
+                ->on('news')
+                ->onDelete('cascade'); // Thêm tùy chọn onDelete('cascade')
+        });
     }
 
     /**

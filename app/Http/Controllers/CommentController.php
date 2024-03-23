@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Comment;
+use App\Models\User;
+use App\Models\News;
 
 class CommentController extends Controller
 {
@@ -21,5 +23,16 @@ class CommentController extends Controller
         $comment->user_id=$request->user_id;
         $comment->save();
         return back()->with('success', 'Comment submitted successfully');
+    }
+    public function destroy(Comment $comment)
+    {
+        // Xóa comment
+        $comment->delete();
+
+        // Cập nhật các liên kết trong các bảng khác
+
+        return back()->with('success', 'Comment deleted successfully');
+
+        // Chuyển hướng hoặc trả về phản hồi tuỳ thuộc vào yêu cầu của bạn
     }
 }
