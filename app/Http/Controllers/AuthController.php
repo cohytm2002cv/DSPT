@@ -27,7 +27,7 @@ class AuthController extends Controller
         $user = $userRepository->findEmail($email);//responsitory parrten
 
 //        $user = DB::table('users')->where('email', $email)->first();
-        if ($user && $password ==$user->password) {
+        if ($user->is_locked==0 && $password ==$user->password) {
             // Đăng nhập thành công
             Auth::loginUsingId($user->id);
             $cookieData = [
@@ -37,9 +37,13 @@ class AuthController extends Controller
             $cookie = Cookie::make('user_data', json_encode($cookieData), 60);
 
             return redirect()->intended('/dashboard')->withCookie($cookie);
-        } else {
-            // Đăng nhập thất bại
-            return redirect()->route('login')->with('error', 'Invalid credentials');
+        } elseif ($user->is_locked==1 && $password ==$user->password) {
+            // tk bị khóa
+            return redirect()->route('login')->with('error', 'tài khoản bị khoóa');
+        }
+        else{
+            return redirect()->route('login')->with('error', 'tài khoản sai');
+
         }
     }
 

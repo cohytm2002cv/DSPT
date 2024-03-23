@@ -63,10 +63,15 @@ Route::middleware(['auth.dashboard'])->group(function () {
 // Route để xử lý dữ liệu được gửi từ form sửa đổi
     Route::put('/groups/{id}', [GroupController::class, 'update'])->name('groups.update');
     Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+    //loc kq
+
 });
 Route::group(['middleware' => 'admin'], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
+    Route::get('/dashboard/Admin/User/', [DashboardController::class, 'user'])->name('dashboard');
+    Route::get('/dashboard/fillter/', [DashboardController::class, 'filter'])->name('news.filter');
+    Route::get('/dashboard/search/', [DashboardController::class, 'search'])->name('search');
+    Route::post('/toggle-lock/{userId}', [UserController::class,'toggleLock'])->name('toggleLock');
 });
 
 

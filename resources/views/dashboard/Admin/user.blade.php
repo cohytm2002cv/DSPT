@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>Dasnhboard- Admin</title>
 
     <!-- Custom fonts for this template-->
     <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
@@ -147,8 +147,9 @@
                 <div class="row">
 
                     <!-- Area Chart -->
-                    <div class="col-xl-8 col-lg-7">
-                        <div class="card shadow mb-4">
+                    <div class="col-xl col-lg-7">
+                        {{--                            //loc bai viet--}}
+                        <div class="card shadow mb-auto " >
                             <!-- Card Header - Dropdown -->
                             <div
                                 class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -169,21 +170,13 @@
                                 </div>
                             </div>
                             <!-- Card Body -->
-                            <div class="card-body">
-                                <div class="chart-area">
-                                    <canvas id="myAreaChart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <!-- Pie Chart -->
-                    <div class="col-xl-4 col-lg-5">
-                        <div class="card shadow mb-4">
+                        {{--                            loc tk--}}
+                        <div class="card shadow mb-auto " >
                             <!-- Card Header - Dropdown -->
                             <div
                                 class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
                                 <div class="dropdown no-arrow">
                                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -200,24 +193,90 @@
                                 </div>
                             </div>
                             <!-- Card Body -->
-                            <div class="card-body">
-                                <div class="chart-pie pt-4 pb-2">
-                                    <canvas id="myPieChart"></canvas>
-                                </div>
-                                <div class="mt-4 text-center small">
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-primary"></i> Direct
-                                        </span>
-                                    <span class="mr-2">
-                                            <i class="fas fa-circle text-success"></i> Social
-                                        </span>
-                                    <span class="mr-2">
-                                            <i class="fas fa-circle text-info"></i> Referral
-                                        </span>
+                            <div class="card-body" style="height: max-content">
+                                <div >
+                                    <form action="{{ route('search') }}" method="GET">
+                                        <input type="text" name="query" placeholder="Nhập tên người dùng...">
+                                        <button type="submit">Tìm Kiếm</button>
+                                    </form>
+
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                        <tr>
+                                            <th>Họ Tên</th>
+                                            <th>Email</th>
+                                            <th>số bài viết</th>
+                                            <th>số chủ đề</th>
+                                            <th>Ngày tạo tài khoản</th>
+                                        </tr>
+                                        </thead>
+
+                                        <tbody>
+                                        @foreach($users as $user)
+                                            <tr>
+                                                {{--                                                    <td><a href="{{ url('news/' . $new->id) }}">--}}
+                                                {{--                                                            {{ $new->title }}--}}
+                                                {{--                                                        </a></td>                                                    <td>{{$new->content}}</td>--}}
+                                                <td>{{$user->name}}</td>
+                                                <td>{{$user->email}}</td>
+                                                <td>{{$user->created_at}}</td>
+                                                <td></td>
+                                                <td style="text-align: center"><form action="{{ route('toggleLock', $user->id) }}" method="POST">
+                                                        @csrf
+                                                        <button  class=" btn-primary" style="width: 40%" type="submit">{{ $user->is_locked ? 'Mở khóa' : 'Khóa' }}</button>
+                                                    </form>
+                                                </td>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Pie Chart -->
+                    {{--                        <div class="col-xl-4 col-lg-5">--}}
+                    {{--                            <div class="card shadow mb-4">--}}
+                    {{--                                <!-- Card Header - Dropdown -->--}}
+                    {{--                                <div--}}
+                    {{--                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">--}}
+                    {{--                                    <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>--}}
+                    {{--                                    <div class="dropdown no-arrow">--}}
+                    {{--                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"--}}
+                    {{--                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+                    {{--                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>--}}
+                    {{--                                        </a>--}}
+                    {{--                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"--}}
+                    {{--                                            aria-labelledby="dropdownMenuLink">--}}
+                    {{--                                            <div class="dropdown-header">Dropdown Header:</div>--}}
+                    {{--                                            <a class="dropdown-item" href="#">Action</a>--}}
+                    {{--                                            <a class="dropdown-item" href="#">Another action</a>--}}
+                    {{--                                            <div class="dropdown-divider"></div>--}}
+                    {{--                                            <a class="dropdown-item" href="#">Something else here</a>--}}
+                    {{--                                        </div>--}}
+                    {{--                                    </div>--}}
+                    {{--                                </div>--}}
+                    {{--                                <!-- Card Body -->--}}
+                    {{--                                <div class="card-body">--}}
+                    {{--                                    <div class="chart-pie pt-4 pb-2">--}}
+                    {{--                                        <canvas id="myPieChart"></canvas>--}}
+                    {{--                                    </div>--}}
+                    {{--                                    <div class="mt-4 text-center small">--}}
+                    {{--                                        <span class="mr-2">--}}
+                    {{--                                            <i class="fas fa-circle text-primary"></i> Direct--}}
+                    {{--                                        </span>--}}
+                    {{--                                        <span class="mr-2">--}}
+                    {{--                                            <i class="fas fa-circle text-success"></i> Social--}}
+                    {{--                                        </span>--}}
+                    {{--                                        <span class="mr-2">--}}
+                    {{--                                            <i class="fas fa-circle text-info"></i> Referral--}}
+                    {{--                                        </span>--}}
+                    {{--                                    </div>--}}
+                    {{--                                </div>--}}
+                    {{--                            </div>--}}
+                    {{--                        </div>--}}
                 </div>
             </div>
             <!-- /.container-fluid -->

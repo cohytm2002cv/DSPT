@@ -81,7 +81,7 @@ class NewsController extends Controller
 
         $this->newsRepository->delete($id);
 
-        return redirect('/tables')->with('success', 'News deleted successfully.');
+        return back()->with('success', 'Comment deleted successfully');
     }
 
 
