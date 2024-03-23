@@ -40,7 +40,7 @@ Route::post('/comments', [CommentController::class,'store'])->name('comments.sto
 
 Route::get('/log/',
     function (){
-    return view('dashboard.logout');
+    return view('dashboard.user.logout');
     }
 );
 
@@ -68,7 +68,9 @@ Route::middleware(['auth.dashboard'])->group(function () {
 });
 Route::group(['middleware' => 'admin'], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/dashboard/Admin/User/', [DashboardController::class, 'user'])->name('dashboard');
+    Route::get('/dashboard/admin/user/', [DashboardController::class, 'user'])->name('admin.user');
+    Route::get('/dashboard/Admin/Group/', [DashboardController::class, 'group'])->name('admin.group');
+
     Route::get('/dashboard/fillter/', [DashboardController::class, 'filter'])->name('news.filter');
     Route::get('/dashboard/search/', [DashboardController::class, 'search'])->name('search');
     Route::post('/toggle-lock/{userId}', [UserController::class,'toggleLock'])->name('toggleLock');

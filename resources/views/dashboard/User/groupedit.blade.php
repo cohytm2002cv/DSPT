@@ -34,7 +34,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        @include('dashboard.natigave')
+        @include('dashboard.user.natigave')
 
     </ul>
     <!-- End of Sidebar -->
@@ -46,66 +46,19 @@
         <div id="content">
 
             <!-- Topbar -->
-            @include('dashboard.navbar')
+            @include('dashboard.user.navbar')
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
-                <form  action="{{ route('group.store') }}"  method="post" enctype="multipart/form-data">
+                <form action="/groups/{{ $group->id }}" method="POST">
                     @csrf
-
-                    <div class="form-group">
-                        <label for="name">Title:</label>
-                        <input type="text" name="name" class="form-control" required>
-
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Create News</button>
+                    @method('PUT')
+                    <label for="name">Tên nhóm:</label>
+                    <input type="text" id="name" name="name" value="{{ $group->name }}">
+                    <!-- Add other fields if needed -->
+                    <button type="submit">Lưu</button>
                 </form>
-            </div>
-            <!-- /.container-fluid -->
-            <div class="container-fluid">
-                <br>
-                <!-- DataTales Example -->
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Danh Sách Nhóm</h6>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
-                                <tr>
-                                    <th>Tên group</th>
-                                    <th>Thao tác</th>
-
-                                </tr>
-                                </thead>
-
-                                <tbody>
-                                @foreach($groups as $group)
-                                    <tr>
-                                        <td>
-                                            <a href="{{ url('/groups/' . $group->id) }}">
-                                                {{ $group->name }}
-                                            </a>
-                                        </td>
-                                        <td style="text-align: right">
-                                            <form action="/groups/{{ $group->id }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="btn btn-danger btn-circle" type="submit"><i class="fas fa-trash"></i></button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
             </div>
 
         </div>

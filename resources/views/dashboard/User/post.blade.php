@@ -34,7 +34,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        @include('dashboard.natigave')
+        @include('dashboard.user.natigave')
 
     </ul>
     <!-- End of Sidebar -->
@@ -46,7 +46,7 @@
         <div id="content">
 
             <!-- Topbar -->
-            @include('dashboard.navbar')
+            @include('dashboard.user.navbar')
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
@@ -116,7 +116,7 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.blade.php">Logout</a>
+                <a class="btn btn-primary" href="{{route('logout')}}">LogOut
             </div>
         </div>
     </div>

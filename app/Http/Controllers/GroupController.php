@@ -23,7 +23,7 @@ class GroupController extends Controller
     public function index()
     {
         $groups = Group::all();
-        return view('dashboard.group', ['groups'=>$groups]);
+        return view('dashboard.user.group', ['groups'=>$groups]);
     }
     public function find($id)
     {
@@ -75,7 +75,7 @@ class GroupController extends Controller
             return response()->json(['message' => 'Group not found'], 404);
         }
 
-        return view('dashboard.groupedit', compact('group'));
+        return view('dashboard.user.groupedit', compact('group'));
     }
     public function update(Request $request, $id)
     {

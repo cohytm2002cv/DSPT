@@ -30,35 +30,40 @@
 
 
 <!-- Nav Item - Pages Collapse Menu -->
-<li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-       aria-expanded="true" aria-controls="collapsePages">
-        <i class="fas fa-fw fa-folder"></i>
-        <span>Pages</span>
-    </a>
-    <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Login Screens:</h6>
-            <a class="collapse-item" href="{{url('dashboard/admin/user ')}}">Quản Lí Tài Khoản</a>
-            <a class="collapse-item" href="{{url('dashboard/admin/user ')}}">Quản Lí Bài Viết</a>
-            <a class="collapse-item" href="{{url('dashboard/admin/user ')}}">Quản Lí Chủ Đề</a>
+{{--<li class="nav-item">--}}
+{{--    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"--}}
+{{--       aria-expanded="true" aria-controls="collapsePages">--}}
+{{--        <i class="fas fa-fw fa-folder"></i>--}}
+{{--        <span>Pages</span>--}}
+{{--    </a>--}}
+{{--    <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">--}}
+{{--        <div class="bg-white py-2 collapse-inner rounded">--}}
+{{--            <h6 class="collapse-header">Login Screens:</h6>--}}
+{{--            <a class="collapse-item" href="{{url('dashboard/admin/user ')}}">Quản Lí Tài Khoản</a>--}}
+{{--            <a class="collapse-item" href="{{url('dashboard/admin/user ')}}">Quản Lí Bài Viết</a>--}}
+{{--            <a class="collapse-item" href="{{url('dashboard/admin/user ')}}">Quản Lí Chủ Đề</a>--}}
 
 
-        </div>
-    </div>
-</li>
+{{--        </div>--}}
+{{--    </div>--}}
+{{--</li>--}}
 
 
 <li class="nav-item active">
-    <a class="nav-link" href="{{url('post')}}">
+    <a class="nav-link" href="{{url('dashboard/admin/user')}}">
         <i class="fas fa-fw fa-table"></i>
-        <span>Post</span></a>
+        <span>Quản Lí Tài Khoản</span></a>
 </li>
 
 <li class="nav-item active">
-    <a class="nav-link" href="{{url('tables')}}">
+    <a class="nav-link" href="{{url('dashboard/')}}">
         <i class="fas fa-fw fa-table"></i>
         <span>Quản Lí Bài Viết</span></a>
+</li>
+<li class="nav-item active">
+    <a class="nav-link" href="{{url('dashboard/')}}">
+        <i class="fas fa-fw fa-table"></i>
+        <span>Quản Lí Chủ Đề</span></a>
 </li>
 
 <!-- Divider -->

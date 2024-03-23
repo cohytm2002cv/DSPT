@@ -42,7 +42,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                @include('dashboard.navbar')
+                @include('dashboard.admin.navbar')
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
@@ -231,69 +231,7 @@
                                 </div>
                             </div>
                             <br>
-{{--                            loc tk--}}
-                            <div class="card shadow mb-auto " >
-                                <!-- Card Header - Dropdown -->
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
-                                    <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                             aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">Dropdown Header:</div>
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body" style="height: max-content">
-                                    <div >
-                                        <form action="{{ route('search') }}" method="GET">
-                                            <input type="text" name="query" placeholder="Nhập tên người dùng...">
-                                            <button type="submit">Tìm Kiếm</button>
-                                        </form>
-
-                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                            <thead>
-                                            <tr>
-                                                <th>Họ Tên</th>
-                                                <th>Email</th>
-                                                <th>số bài viết</th>
-                                                <th>số chủ đề</th>
-                                                <th>Ngày tạo tài khoản</th>
-                                            </tr>
-                                            </thead>
-
-                                            <tbody>
-                                            @foreach($users as $user)
-                                                <tr>
-{{--                                                    <td><a href="{{ url('news/' . $new->id) }}">--}}
-{{--                                                            {{ $new->title }}--}}
-{{--                                                        </a></td>                                                    <td>{{$new->content}}</td>--}}
-                                                    <td>{{$user->name}}</td>
-                                                    <td>{{$user->email}}</td>
-                                                    <td>{{$user->created_at}}</td>
-                                                    <td></td>
-                                                    <td style="text-align: center"><form action="{{ route('toggleLock', $user->id) }}" method="POST">
-                                                            @csrf
-                                                            <button  class=" btn-primary" style="width: 40%" type="submit">{{ $user->is_locked ? 'Mở khóa' : 'Khóa' }}</button>
-                                                        </form>
-                                                    </td>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
+{{--
                         </div>
 
                         <!-- Pie Chart -->

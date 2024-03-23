@@ -31,7 +31,7 @@
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-        @include('dashboard.natigave')
+        @include('dashboard.admin.natigave')
     </ul>
     <!-- End of Sidebar -->
 

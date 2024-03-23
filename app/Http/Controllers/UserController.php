@@ -25,4 +25,5 @@ class UserController extends Controller
 
         return redirect()->back()->with('success', 'Trạng thái khóa tài khoản đã được cập nhật.');
     }
+
 }

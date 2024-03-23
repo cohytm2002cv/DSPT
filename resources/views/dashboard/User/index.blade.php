@@ -31,7 +31,7 @@
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-        @include('dashboard.natigave')
+        @include('dashboard.user.natigave')
         </ul>
         <!-- End of Sidebar -->
 
@@ -42,7 +42,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                @include('dashboard.navbar')
+                @include('dashboard.user.navbar')
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->

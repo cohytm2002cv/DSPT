@@ -34,7 +34,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        @include('dashboard.natigave')
+        @include('dashboard.user.natigave')
 
     </ul>
     <!-- End of Sidebar -->
@@ -46,23 +46,70 @@
         <div id="content">
 
             <!-- Topbar -->
-            @include('dashboard.navbar')
+            @include('dashboard.user.navbar')
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
-                <form action="{{ route('banners.createOrUpdate') }}" method="POST" enctype="multipart/form-data">
+                <form  action="{{ route('group.store') }}"  method="post" enctype="multipart/form-data">
                     @csrf
 
-                    <input type="text" name="title" value="{{ $banner->title }}" required>
-                    <input type="file" name="image" accept="image/*">
+                    <div class="form-group">
+                        <label for="name">Title:</label>
+                        <input type="text" name="name" class="form-control" required>
 
-                    <button type="submit">Save</button>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Create News</button>
                 </form>
             </div>
             <!-- /.container-fluid -->
+            <div class="container-fluid">
+                <br>
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Danh Sách Nhóm</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>Tên group</th>
+                                    <th>Thao tác</th>
+
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                @foreach($groups as $group)
+                                    <tr>
+                                        <td>
+                                            <a href="{{ url('/groups/' . $group->id) }}">
+                                                {{ $group->name }}
+                                            </a>
+                                        </td>
+                                        <td style="text-align: right">
+                                            <form action="/groups/{{ $group->id }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-danger btn-circle" type="submit"><i class="fas fa-trash"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
 
         </div>
+
         <!-- End of Main Content -->
 
         <!-- Footer -->
@@ -100,39 +147,31 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.blade.php">Logout</a>
+                <a class="btn btn-primary" href="{{route('logout')}}">LogOut
             </div>
         </div>
     </div>
 </div>
 
 <!-- Bootstrap core JavaScript-->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<!-- Core plugin JavaScript-->
-<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
 <!-- Custom scripts for all pages-->
-<script src="js/sb-admin-2.min.js"></script>
+<script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
+<script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="{{asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="{{asset('js/sb-admin-2.min.js')}}"></script>
 
 <!-- Page level plugins -->
-<script src="vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="{{asset('vendor/chart.js/Chart.min.js')}}"></script>
 
 <!-- Page level custom scripts -->
-<script src="{{ asset('vendor/ckeditor/ckeditor.js') }}"></script>
-<script src="{{ asset('node_modules/ckeditor4/ckeditor.js') }}"></script>
-<script src="{{ asset('node_modules/ckeditor4/ckeditor.js') }}"></script>
-<script src="{{ asset('vendor/ckeditor/ckeditor.js') }}"></script>
-<script>
-    CKEDITOR.replace('editor', {
-        toolbar: 'Full',
-        height: 300,
-        enterMode: CKEDITOR.ENTER_BR
-
-    });
-</script>
+<script src="{{asset('js/demo/chart-area-demo.js')}}"></script>
+<script src="{{asset('js/demo/chart-pie-demo.js')}}"></script>
 
 </body>
 

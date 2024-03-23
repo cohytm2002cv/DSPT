@@ -19,7 +19,7 @@ class DashboardController extends Controller
         $id=$user->id;
         $user = User::find($id);
         $news = $user->news;
-        return view('dashboard.tables',[
+        return view('dashboard.user.tables',[
             'news'=>$news,
         ]);
     }
@@ -30,7 +30,7 @@ class DashboardController extends Controller
         $user = User::find($id);
         $news = $user->news;
         $groups=Group::all();
-        return view('dashboard.post',[
+        return view('dashboard.user.post',[
             'news'=>$news,
             'groups'=>$groups,
         ]);
@@ -48,6 +48,15 @@ class DashboardController extends Controller
 
         ]);
     }
+    public  function user()
+    {
+
+        $users=User::all();
+
+        return view('dashboard.admin.user',[
+            'users'=>$users,
+        ]);
+    }
     public function filter(Request $request)
     {
         $author = $request->input('author');
@@ -62,7 +71,7 @@ class DashboardController extends Controller
 
 
         // Trả về view và chuyển dữ liệu tin tức đã lọc vào view
-        return view('dashboard.index', [
+        return view('dashboard.admin.index', [
             'news' => $filteredNews,
             'users' => User::all(),
             'groups'=>Group::all()// Truyền tất cả người dùng, nếu cần
@@ -73,7 +82,7 @@ class DashboardController extends Controller
         $query = $request->input('query');
         $news=News::all();
         $users = User::where('name', 'LIKE', "%$query%")->get();
-        return view('dashboard.index', [
+        return view('dashboard.admin.index', [
             'users' => $users,
             'news'=>$news,
             'groups'=>Group::all()// Truyền tất cả người dùng, nếu cần
