@@ -178,6 +178,7 @@
 
                                             <p>Welcome, {{ $userData['user_name'] }}!</p>
                                         @endif
+
                                     @endauth
                                 </span>
                 <img class="img-profile rounded-circle"

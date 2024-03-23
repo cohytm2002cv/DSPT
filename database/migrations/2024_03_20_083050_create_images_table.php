@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNewsTable extends Migration
+class CreateImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateNewsTable extends Migration
      */
     public function up()
     {
-        Schema::create('news', function (Blueprint $table) {
+        Schema::create('images', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('content');
-            $table->string('author');
-            $table->integer('user_id');
-            $table->timestamp('published_at')->nullable();
+            $table->string('image_path'); // Đường dẫn của hình ảnh
+            $table->string('name')->nullable(); // Tên của hình ảnh (cho mục đích tham chiếu)
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateNewsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('news');
+        Schema::dropIfExists('images');
     }
 }

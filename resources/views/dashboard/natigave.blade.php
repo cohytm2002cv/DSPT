@@ -18,7 +18,14 @@
 <!-- Divider -->
 <hr class="sidebar-divider">
 
+@auth
+    @if(request()->cookie('user_data'))
+        @php
+            $userData = json_decode(request()->cookie('user_data'), true);
+        @endphp
 
+    @endif
+@endauth
 
 
 
@@ -33,6 +40,9 @@
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Login Screens:</h6>
             <a class="collapse-item" href="{{url('dashboard/banner')}}">Banner</a>
+            <a class="collapse-item" href="{{url('dashboard/group ')}}">Group</a>
+
+            <a class="collapse-item" href="{{ url('dashboard/news/'. $userData['user_id'])}}">Bài Viết Của Tôi</a>
             <a class="collapse-item" href="register.html">Register</a>
             <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
             <div class="collapse-divider"></div>

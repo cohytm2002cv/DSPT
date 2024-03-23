@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 use App\DatabaseManager;
 use App\Models\Banner;
+use App\Models\Comment;
 use App\Models\Group;
 use App\Models\News;
 use Illuminate\Http\Request;
 use App\Repositories\NewsRepositoryInterface;
-
 class NewsController extends Controller
 {
     protected $newsRepository;
@@ -17,21 +17,27 @@ class NewsController extends Controller
     }
     public function index()
     {
-        $banner=Banner::first();
         $news = News::all();
         $groups=Group::all();
         return view('news.home',
             [   'news' => $news,
                 'groups'=>$groups,
-                'banner'=>$banner,
              ]);
     }
 
     public function show($id)
     {
+        $cmt= Comment::where('id_news', $id)->get(); // Truy vấn các bình luận với điều kiện id_news là id của bài viết
+
         $dataManager = DatabaseManager::getInstance();
         $new = $dataManager->findNewsById($id);
-        return view('news.news', ['new' => $new]);
+        $group=Group::all();
+        return view('news.detail',
+            ['new' => $new,
+                'comments'=>$cmt,
+                'groups'=>$group
+
+        ]);
     }
     public function store(Request $request)
     {
@@ -43,6 +49,8 @@ class NewsController extends Controller
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Đảm bảo tệp là hình ảnh và không quá 2MB
+            'group_id' => 'required|exists:groups,id', // Kiểm tra group_id có tồn tại trong bảng groups không
+
         ]);
 
         if ($request->hasFile('image')) {

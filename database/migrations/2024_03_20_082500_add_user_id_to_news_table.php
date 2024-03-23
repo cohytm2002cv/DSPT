@@ -14,7 +14,8 @@ class AddUserIdToNewsTable extends Migration
     public function up()
     {
         Schema::table('news', function (Blueprint $table) {
-            $table->foreignId('user_id')->constrained();
+            $table->unsignedBigInteger('user_id'); // Thêm cột user_id
+            $table->foreign('user_id')->references('id')->on('users'); // Tạo ràng buộc khóa ngoại
         });
     }
 
@@ -26,8 +27,8 @@ class AddUserIdToNewsTable extends Migration
     public function down()
     {
         Schema::table('news', function (Blueprint $table) {
-            $table->dropForeign(['user_id']);
-            $table->dropColumn('user_id');
+            $table->dropForeign(['user_id']); // Xóa ràng buộc khóa ngoại
+            $table->dropColumn('user_id'); // Xóa cột user_id
         });
     }
 }

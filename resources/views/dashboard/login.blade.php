@@ -62,10 +62,8 @@
                                                     Me</label>
                                             </div>
                                         </div>
-                                            <button type="submit">Login</button>
-                                        <a href="index.blade.php" class="btn btn-primary btn-user btn-block">
-                                            Login
-                                        </a>
+                                            <button class="btn btn-primary btn-user btn-block" type="submit">Login</button>
+
                                         <hr>
                                         <a href="index.blade.php" class="btn btn-google btn-user btn-block">
                                             <i class="fab fa-google fa-fw"></i> Login with Google

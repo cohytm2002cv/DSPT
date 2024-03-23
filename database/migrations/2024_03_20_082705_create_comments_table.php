@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddImagePathToNewsTable extends Migration
+class CreateCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class AddImagePathToNewsTable extends Migration
      */
     public function up()
     {
-        Schema::table('news', function (Blueprint $table) {
-            $table->string('image_path')->nullable();
-
+        Schema::create('comments', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('email');
+            $table->text('content');
+            $table->timestamps();
         });
     }
 
@@ -26,9 +29,6 @@ class AddImagePathToNewsTable extends Migration
      */
     public function down()
     {
-        Schema::table('news', function (Blueprint $table) {
-            $table->dropColumn('image_path');
-
-        });
+        Schema::dropIfExists('comments');
     }
 }

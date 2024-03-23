@@ -51,34 +51,18 @@
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
-                <form  action="{{ route('post.store') }}"  method="post" enctype="multipart/form-data">
+                <form action="/groups/{{ $group->id }}" method="POST">
                     @csrf
-
-                    <div class="form-group">
-                        <label for="title">Title:</label>
-                        <input type="text" name="title" class="form-control" required>
-                        <div class="form-group">
-                            <label for="image">Image:</label>
-                            <input type="file" name="image"  required>
-                        </div>
-                    </div>
-                    <label for="group_id">Group:</label>
-                    <select id="group_id" name="group_id">
-                        <option value="">Select a group</option>
-                        @foreach ($groups as $group)
-                            <option value="{{ $group->id }}">{{ $group->name }}</option>
-                        @endforeach
-                    </select>
-                    <div class="form-group">
-                        <label for="content">Content:</label>
-                        <textarea name="content" id="editor" class="form-control" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Create News</button>
+                    @method('PUT')
+                    <label for="name">Tên nhóm:</label>
+                    <input type="text" id="name" name="name" value="{{ $group->name }}">
+                    <!-- Add other fields if needed -->
+                    <button type="submit">Lưu</button>
                 </form>
             </div>
-            <!-- /.container-fluid -->
 
         </div>
+
         <!-- End of Main Content -->
 
         <!-- Footer -->
@@ -123,32 +107,24 @@
 </div>
 
 <!-- Bootstrap core JavaScript-->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<!-- Core plugin JavaScript-->
-<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
 <!-- Custom scripts for all pages-->
-<script src="js/sb-admin-2.min.js"></script>
+<script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
+<script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="{{asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="{{asset('js/sb-admin-2.min.js')}}"></script>
 
 <!-- Page level plugins -->
-<script src="vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="{{asset('vendor/chart.js/Chart.min.js')}}"></script>
 
 <!-- Page level custom scripts -->
-<script src="{{ asset('vendor/ckeditor/ckeditor.js') }}"></script>
-<script src="{{ asset('node_modules/ckeditor4/ckeditor.js') }}"></script>
-<script src="{{ asset('node_modules/ckeditor4/ckeditor.js') }}"></script>
-<script src="{{ asset('vendor/ckeditor/ckeditor.js') }}"></script>
-<script>
-    CKEDITOR.replace('editor', {
-        toolbar: 'Full',
-        height: 300,
-        enterMode: CKEDITOR.ENTER_BR
-
-    });
-</script>
+<script src="{{asset('js/demo/chart-area-demo.js')}}"></script>
+<script src="{{asset('js/demo/chart-pie-demo.js')}}"></script>
 
 </body>
 

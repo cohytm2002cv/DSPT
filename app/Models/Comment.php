@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Banner extends Model
+class Comment extends Model
 {
     use HasFactory;
-    protected $fillable = ['title', 'image'];
 
+    protected $table = 'comments';
+
+    protected $fillable = ['name', 'cmt','user_id'];
 }

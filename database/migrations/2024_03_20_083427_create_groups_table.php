@@ -15,8 +15,8 @@ class CreateGroupsTable extends Migration
     {
         Schema::create('groups', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->timestamp('create_at')->nullable();
+            $table->string('name'); // Tên của nhóm
+            $table->string('title')->nullable(); // Tiêu đề của nhóm (cho mục đích tham chiếu)
             $table->timestamps();
         });
     }

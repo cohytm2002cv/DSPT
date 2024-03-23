@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Group;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -28,8 +29,10 @@ class DashboardController extends Controller
         $id=$user->id;
         $user = User::find($id);
         $news = $user->news;
+        $groups=Group::all();
         return view('dashboard.post',[
             'news'=>$news,
+            'groups'=>$groups,
         ]);
     }
 

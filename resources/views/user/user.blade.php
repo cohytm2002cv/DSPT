@@ -43,14 +43,7 @@
 
 </head>
 <body>
-@auth
-    @if(request()->cookie('user_data'))
-        @php
-            $userData = json_decode(request()->cookie('user_data'), true);
-        @endphp
 
-    @endif
-@endauth
 <div class="container">
     <header class="blog-header py-3">
         <div class="row flex-nowrap justify-content-between align-items-center">
@@ -64,17 +57,7 @@
                 <a class="link-secondary" href="#" aria-label="Search">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img" viewBox="0 0 24 24"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"/><path d="M21 21l-5.2-5.2"/></svg>
                 </a>
-                <a class="btn btn-sm btn-outline-secondary" href="{{url('dashboard')}}">
-                    @if(request()->cookie('user_data'))
-                        @php
-                            $userData = json_decode(request()->cookie('user_data'), true);
-                        @endphp
-
-                        <p>Xin Chào, {{ $userData['user_name'] }}!</p>
-                    @else
-                       Sign Up
-                    @endif
-                </a>
+                <a class="btn btn-sm btn-outline-secondary" href="{{url('dashboard')}}">Sign up</a>
             </div>
         </div>
     </header>
@@ -83,7 +66,7 @@
         <nav class="nav d-flex justify-content-between">
             @foreach($groups as $group)
 
-            <a class="p-2 link-secondary" href="{{ url('news/group', $group->id) }}">{{$group->name}}</a>
+                <a class="p-2 link-secondary" href="{{ route('group', $group->id) }}">{{$group->name}}</a>
 
             @endforeach
         </nav>
@@ -93,34 +76,32 @@
 <main class="container">
     <div  class="p-4 p-md-5 mb-4 text-white rounded bg-dark " >
         <div class="col-md-6 px-0" >
-            <h1 class="display-4 fst-italic">Cuộc Sống Hôm Nay</h1>
+            <h1 class="display-4 fst-italic">{{$banner->title}}</h1>
             <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and efficiently about what’s most interesting in this post’s contents.</p>
             <p class="lead mb-0"><a href="#" class="text-white fw-bold">Continue reading...</a></p>
         </div>
     </div>
     <div class="row mb-2" >
         @foreach($news as $new)
-        <div class="col-md-6" >
-            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                <div class="col p-4 d-flex flex-column position-static">
-                    <strong class="d-inline-block mb-2 text-primary">World</strong>
+            <div class="col-md-6" >
+                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <strong class="d-inline-block mb-2 text-primary">World</strong>
                         <h3 class="mb-0"> {{ $new->title }}</h3>
-                    @if ($new->created_at)
-                        <div class="mb-1 text-muted">{{ $new->created_at->format('d/m/Y H:i a') }}</div>
-                    @else
-                        <div class="mb-1 text-muted">Ngày tạo không xác định</div>
-                    @endif                    <p class="card-text mb-auto news-content">
-                    {{ $new->content }}
-                    </p>
-                    <a href="{{ url('news/' . $new->id) }}" class="stretched-link">Continue reading</a>
-                </div>
-                <div class="col-auto d-none d-lg-block" style="width: 250px;">
-
-                     <img width="100%" height="auto" src="{{ asset($new->image_path) }}" alt="Ảnh">
-
+                        @if ($new->created_at)
+                            <div class="mb-1 text-muted">{{ $new->created_at->format('d/m/Y H:i a') }}</div>
+                        @else
+                            <div class="mb-1 text-muted">Ngày tạo không xác định</div>
+                        @endif                    <p class="card-text mb-auto news-content">
+                            {{ $new->content }}
+                        </p>
+                        <a href="{{ url('news/' . $new->id) }}" class="stretched-link">Continue reading</a>
+                    </div>
+                    <div class="col-auto d-none d-lg-block" style="width: 250px;">
+                        <img width="100%;"  height="auto" src="{{asset($new->image_path)}}" alt="">
+                    </div>
                 </div>
             </div>
-        </div>
         @endforeach
     </div>
 
